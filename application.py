@@ -15,9 +15,9 @@ def index():
     return render_template("index.html")
 
 
-@app.route('/shop')
-def shop():
-    return render_template('shop.html')
+@app.route('/shop/<string:shop_name>')
+def shop(shop_name):
+    return render_template('shop.html', shop_name=shop_name)
 
 
 @app.route('/shop_category/<string:category>')
