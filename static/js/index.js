@@ -21,10 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
         let navItem = document.createElement('button');
         navItem.className = 'btn btn-success';
         navItem.type = 'button';
-        // navItem.setAttribute('data-toggle', 'collapse');
-        // navItem.setAttribute('data-target', 'collapseExample');
-        // navItem.setAttribute('aria-expanded', 'false');
-        // navItem.setAttribute('aria-controls', 'collapseExample');
         navItem.innerHTML = itemName;
         return navItem;
     }
@@ -45,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         storeText.innerHTML = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio deserunt fuga perferendis modi earum';
         let storeLink = document.createElement('a');
         storeLink.className = 'btn btn-success';
-        storeLink.href = Flask.url_for('shop');
+        storeLink.href = Flask.url_for('shop', {'shop_name': storeName.innerHTML});
         storeLink.innerHTML = '去看看';
         store.append(storeImg);
         store.append(storeName);

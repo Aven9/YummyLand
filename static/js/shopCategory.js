@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         storeName.innerHTML = name;
         let storeLink = document.createElement('a');
         storeLink.className = 'btn btn-outline-success container-fluid';
-        storeLink.href = Flask.url_for('shop');
+        storeLink.href = Flask.url_for('shop', {'shop_name': storeName.innerHTML});
         storeLink.innerHTML = '进入店铺';
         store.append(storeImg);
         store.append(storeName);
