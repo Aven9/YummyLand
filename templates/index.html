@@ -2,6 +2,11 @@
 
 {% extends "template.html" %}
 
+{% block src %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
 {% block username %}
     未登录
 {% endblock %}
@@ -10,6 +15,7 @@
     <span class="sr-only">(current)</span>
 {% endblock %}
 
+<!-- Header -->
 {% block header_section %}
     <div class="row" style="padding-left: 20px; padding-top: 15px">
         <div class="col-sm-3" style="line-height: 5%" id="home-header">
@@ -17,11 +23,25 @@
             <p style="padding-left: 10px">Enjoy your meal</p>
         </div>
         <div class="col-sm-7" style="padding-top: 20px">
-            <input class="form-control" style="alignment: bottom" type="text" placeholder="Default input">
+            <input class="form-control" style="alignment: bottom" type="text" placeholder="寻找菜品或商家">
         </div>
         <div class="col-sm-2" style="padding-top: 20px">
             <button type="button" style="alignment: bottom" class="btn btn-outline-success">Search</button>
         </div>
+    </div>
+{% endblock %}
+
+{% block body_section %}
+    <!--classify-->
+    <div class="btn-group container-fluid" id="nav" role="group" aria-label="Basic example" style="padding: 20px">
+    </div>
+    <!--discount-->
+    <h4 style="padding-left: 2%">折扣专区</h4>
+    <div class="row" id="discount">
+    </div>
+    <!--recommend-->
+    <h4 style="padding-left: 2%; padding-top: 2%">今日力荐</h4>
+    <div class="row" id="recommend">
     </div>
 {% endblock %}
 
@@ -35,8 +55,8 @@
                 <!-- Grid column -->
                 <div class="col-md-6 mt-md-0 mt-3">
                     <!-- Content -->
-                    <h5 class="text-uppercase font-weight-bold">Footer text 1</h5>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita sapiente sint, nulla, nihil
+                    <h5 class="text-uppercase font-weight-bold">关于</h5>
+                    <p> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita sapiente sint, nulla, nihil
                         repudiandae commodi voluptatibus corrupti animi sequi aliquid magnam debitis, maxime quam recusandae
                         harum esse fugiat. Itaque, culpa?</p>
                 </div>
@@ -45,7 +65,7 @@
                 <!-- Grid column -->
                 <div class="col-md-6 mb-md-0 mb-3">
                     <!-- Content -->
-                    <h5 class="text-uppercase font-weight-bold">Footer text 2</h5>
+                    <h5 class="text-uppercase font-weight-bold">如何联系我们</h5>
                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio deserunt fuga perferendis modi earum
                         commodi aperiam temporibus quod nulla nesciunt aliquid debitis ullam omnis quos ipsam, aspernatur id
                         excepturi hic.</p>
