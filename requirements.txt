@@ -2,3 +2,4 @@ Flask
 Flask-Session
 requests
 Flask-JSGlue
+sqlalchemy

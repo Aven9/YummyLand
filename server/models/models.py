@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, create_engine, ForeignKey, TIMESTAMP, INTEGER, FLOAT
+from sqlalchemy import Column, String, create_engine, ForeignKey, TIMESTAMP, INTEGER
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker, relationship
 
@@ -66,6 +66,10 @@ class Food(base):
     __tablename__ = 'Food'
 
     id = Column(INTEGER, autoincrement=True, primary_key=True)
+    price = Column(INTEGER, nullable=False)
+    name = Column(String, nullable=False)
+    imageUrl = Column(String, nullable=False)
+    createdAt = Column(TIMESTAMP, nullable=False)
 
 
 def create(postgres_url):
