@@ -24,6 +24,8 @@
     |4|账号已被注册|
     |5|服务器错误|
     
+6. 所有价格（price）的单位为分
+    
 ## 用户模块
 
 ### 说明
@@ -307,6 +309,7 @@ id: int
     name: string,
     imageUrl: string,
     introduction: string,
+    phone: string,
     food: {
         'categoryName': [{
             id: int,
@@ -379,6 +382,38 @@ remark: string, //备注
 ```
 {
     id: int// 订单id
+}
+```
+
+### 获取订单
+
+***url:*** /get
+
+***method:*** post
+
+***params:***
+```
+page: int, //从1开始
+limit: int, //每页数量
+```
+
+***return:***
+```
+{
+    orders: [{
+        id: int,
+        foods:[{
+            id: int,
+            name: string,
+            price: int,
+            imageUrl: string,
+            number: int
+        }]
+        addressId: int,
+        status: int,
+        createdAt: timestamp,
+        remark: string, //备注
+    }]
 }
 ```
 
@@ -459,34 +494,256 @@ rate: int
 
 ## 商家用户模块
 
-### 
+###说明
 
-***url:*** 
+1. 该某块所有接口默认带有前缀/shopUser
+2. return中表示的为返回数据中data的数据格式
 
-***method:*** 
+### 获取验证码
+
+***url:*** /verificationCode
+
+***method:*** POST
 
 ***params:***
 ```
-
+email: string
 ```
 
 ***return:***
 ```
+{
+    email: string
+}
+```
+
+### 注册
+
+***url:*** /register 
+
+***method:*** POST
+
+***params:***
+```
+name: string,
+email: string,
+password: string, //sha256加密
+```
+
+***return:***
+```
+{
+    id: int, //用户id
+}
+```
+
+### 登陆
+
+***url:*** /login 
+
+***method:*** POST
+
+***params:***
+```
+email: string,
+password: string
+```
+
+***return:***
+```
+{
+    id: int, //用户id
+}
+```
+
+### 获取商店信息
+
+***url:*** /shop/get
+
+***method:*** GET
+
+***params:***
+```
+null
+```
+
+***return:***
+```
+{
+    name: string,
+    imageUrl: string,
+    introduction: string,
+    phone: string,
+    food: {
+        'categoryName': [{
+            id: int,
+            name: string,
+            price: int,
+            imageUrl: string
+        }]
+    }
+}
+```
+
+### 更新商店信息
+
+***url:*** /shop/upload
+
+***method:*** post
+
+***params:***
+```
+name: string,
+imageUrl: string,
+introduction: string,
+phone: string,
+food: {
+    'categoryName': [{
+        name: string,
+        price: int,
+        imageUrl: string
+    }]
+}
+```
+
+***return:***
+```
+{
+    status: 'success'
+}
+```
+
+### 上传图片
+
+***url:*** /shop/upload
+
+***method:*** POST 
+
+***params:***
+```
+file: FILE
+```
+
+***return:***
+```
+{
+    url: string
+}
+```
+
+### 获取评论信息
+
+***url:*** /shop/common
+
+***method:*** GET
+
+***params:***
+```
+null
+```
+
+***return:***
+```
+{
+    commons: [{
+        id: int,
+        text: string,
+        imageUrl: string,
+        rate: int,
+        createdAt: timestamp
+    }]
+}
 ```
 
 ## 商家订单系统
 
-### 
+### 说明
 
-***url:*** 
+1. 该某块所有接口默认带有前缀/shopOrder
+2. return中表示的为返回数据中data的数据格式
+3. 订单状态码（status）同订单系统中状态码
 
-***method:*** 
+### 获取所有订单
+
+***url:*** /get
+
+***method:*** post
 
 ***params:***
 ```
-
+null
 ```
 
 ***return:***
 ```
+{
+    orders: [{
+        id: int,
+        foods:[{
+            id: int,
+            name: string,
+            price: int,
+            imageUrl: string,
+            number: int
+        }]
+        addressId: int,
+        status: int,
+        createdAt: timestamp,
+        remark: string, //备注
+    }]
+}
+```
+
+### 确认接单
+
+***url:*** /confirm
+
+***method:*** post
+
+***params:***
+```
+id: int
+```
+
+***return:***
+```
+{
+    id: int
+}
+```
+
+### 派送订单
+
+***url:*** /send
+
+***method:*** post
+
+***params:***
+```
+id: int
+```
+
+***return:***
+```
+{
+    id: int
+}
+```
+
+### 取消订单
+
+***url:*** /cancel
+
+***method:*** post
+
+***params:***
+```
+id: int
+```
+
+***return:***
+```
+{
+    id: int
+}
 ```
