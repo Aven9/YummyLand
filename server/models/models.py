@@ -9,7 +9,6 @@ class User(base):
     __tablename__ = 'User'
 
     id = Column(INTEGER, autoincrement=True, primary_key=True)
-    phone = Column(String, nullable=False)
     email = Column(String, nullable=False)
     nickname = Column(String, nullable=False)
     password = Column(String, nullable=False)
