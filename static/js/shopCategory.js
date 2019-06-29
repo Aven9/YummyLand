@@ -1,7 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
    var stores = ['四季度', '丹尼斯', '瞌睡🐱', '戴女士'];
-   for (let i in stores){
-       document.getElementById('shops').append(add_shop(stores[i]));
+
+   loadStores(stores);
+
+   function loadStores(stores) {
+       for (let i in stores){
+           document.getElementById('shops').append(add_shop(stores[i]));
+       }
    }
 
    function add_shop(name) {
@@ -19,7 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
        store.append(add_shop_intro(name));
 
        for (var i=0; i<3; i++) {
-           let dish = add_dish();
+           let img = loadImg();
+           let dish = add_dish(img);
            store.append(dish);
        }
        card.append(store);
@@ -27,9 +33,15 @@ document.addEventListener('DOMContentLoaded', () => {
        return component;
    }
 
+   function loadImg() {
+       let imgs = ['fastfood.jpeg', 'pasta.jpg', 'pizza.jpg', 'sushi.jpg'];
+       let img = imgs[Math.round(Math.random()*3)];
+       return img;
+   }
+
    function add_shop_intro(name) {
        let row = document.createElement("div");
-        row.className = "col-sm-4 col-lg-3 dish";
+        row.className = "col-sm-4 col-lg-3 shop";
         let card = document.createElement("div");
         card.className = 'card';
         let store = document.createElement('div');
@@ -50,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return row;
    }
 
-   function add_dish() {
+   function add_dish(img) {
         let row = document.createElement("div");
         row.className = "col-sm-4 col-lg-3 dish";
         let card = document.createElement("div");
@@ -60,9 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let storeImg = document.createElement("img");
         storeImg.className = "card-img-top";
 
-        let imgs = ['fastfood.jpeg', 'pasta.jpg', 'pizza.jpg', 'sushi.jpg'];
-        let img = imgs[Math.round(Math.random()*3)];
-
+        // need modify path...
         storeImg.src = '../static/img/'+img;
         let storeName = document.createElement('h5');
         storeName.innerHTML = 'foo';

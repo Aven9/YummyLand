@@ -1,20 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
+
     let navs = ['快餐', '私房菜', '川菜', '粤菜', '北京菜', '西北菜', '西餐', '日料', '韩料', '烧烤'];
-    for (let i in navs) {
-        let navItem = addNavItem(navs[i]);
-        navItem.onclick = ()=>{
-            let category = navItem.innerHTML;
-            window.location.href = Flask.url_for('shop_category', {'category': category});
-        };
-        document.getElementById('nav').append(navItem);
+
+    loadNavs(navs);
+
+    loadStores('discount', 4);
+
+    loadStores('recommend', 6);
+
+    function loadNavs(navs) {
+        for (let i in navs) {
+            let navItem = addNavItem(navs[i]);
+            navItem.onclick = ()=>{
+                let category = navItem.innerHTML;
+                window.location.href = Flask.url_for('shop_category', {'category': category});
+            };
+            document.getElementById('nav').append(navItem);
+        }
     }
 
-    for (var i=0; i<4; i++){
-        document.getElementById('discount').append(addStore());
-    }
-
-    for (var i=0; i<6; i++){
-        document.getElementById('recommend').append(addStore());
+    function loadStores(sec_id, num) {
+        for (var i=0; i<num; i++){
+            document.getElementById(sec_id).append(addStore());
+        }
     }
 
     function addNavItem(itemName) {
