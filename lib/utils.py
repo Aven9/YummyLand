@@ -20,7 +20,7 @@ def send_email(to_account, subject, content):
 
     # 4. 配置发送内容msg
     msg = MIMEText(content, 'plain', 'utf-8')
-    msg['Subject'] = Header(subject,'utf-8')
+    msg['Subject'] = Header(subject, 'utf-8')
     msg['From'] = "yunnnzhan@163.com"
     msg['To'] = to_account
 

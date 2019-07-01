@@ -3,3 +3,4 @@ Flask-Session
 requests
 Flask-JSGlue
 sqlalchemy
+flask_sqlalchemy

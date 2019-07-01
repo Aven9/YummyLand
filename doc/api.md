@@ -64,7 +64,7 @@ email: string
 username: string,
 email: string,
 password: string, //最好转成sha256
-code: string,
+code: int,
 ```
 
 ***return:***
