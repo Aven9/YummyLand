@@ -1,5 +1,5 @@
 let cartKey = 'cart';
-localStorage.setItem(cartKey, JSON.stringify([]));
+// localStorage.setItem(cartKey, JSON.stringify([]));
 if (!localStorage.getItem(cartKey)) {
     localStorage.setItem(cartKey, JSON.stringify([]));
 }
