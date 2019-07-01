@@ -6,8 +6,10 @@ class User(db.Model):
 
     id = db.Column(db.INTEGER, autoincrement=True, primary_key=True)
     email = db.Column(db.String, nullable=False)
-    nickname = db.Column(db.String, nullable=False)
+    username = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
+    imageUrl = db.Column(db.String, nullable=False)
+    birthday = db.Column(db.String, nullable=False)
     createdAt = db.Column(db.TIMESTAMP, nullable=False)
 
     addresses = db.relationship('Address', backref='User', lazy='dynamic')

@@ -123,9 +123,7 @@ null
 ***params:***
 ```
 username: string,
-email: string,
-imageUrl: string,
-birthday: data
+birthday: string
 ```
 
 ***return:***
