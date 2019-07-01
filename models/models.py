@@ -12,6 +12,7 @@ class User(db.Model):
     birthday = db.Column(db.String, nullable=False)
     createdAt = db.Column(db.TIMESTAMP, nullable=False)
 
+    commons = db.relationship('Commons', backref='User', lazy='dynamic')
     addresses = db.relationship('Address', backref='User', lazy='dynamic')
     orders = db.relationship('Order', backref='User', lazy='dynamic')
 
@@ -36,12 +37,13 @@ class Order(db.Model):
 
     id = db.Column(db.INTEGER, autoincrement=True, primary_key=True)
     status = db.Column(db.INTEGER, nullable=False, default=0)
+    remark = db.Column(db.String, nullable=False)
     createdAt = db.Column(db.TIMESTAMP, nullable=False)
 
     user_id = db.Column(db.INTEGER, db.ForeignKey('User.id'))
     address_id = db.Column(db.INTEGER, db.ForeignKey('Address.id'))
 
-    food_numbers = db.relationship('Order', backref='FoodNumber', lazy='dynamic')
+    food_numbers = db.relationship('FoodNumber', backref='Order', lazy='dynamic')
 
 
 class FoodNumber(db.Model):
@@ -67,7 +69,21 @@ class Shop(db.Model):
     classification = db.Column(db.String, nullable=False)
     createdAt = db.Column(db.TIMESTAMP, nullable=False)
 
-    food_classifications = db.relationship('Shop', backref='FoodClassification', lazy='dynamic')
+    commons = db.relationship('Common', backref='Shop', lazy='dynamic')
+    food_classifications = db.relationship('FoodClassification', backref='Shop', lazy='dynamic')
+
+
+class Common(db.Model):
+    __tablename__ = 'Common'
+
+    id = db.Column(db.INTEGER, autoincrement=True, primary_key=True)
+    text = db.Column(db.String, nullable=False)
+    imageUrl = db.Column(db.String, nullable=False)
+    rate = db.Column(db.INTEGER, nullable=False)
+    createdAt = db.Column(db.TIMESTAMP, nullable=False)
+
+    user_id = db.Column(db.INTEGER, db.ForeignKey('User.id'))
+    shop_id = db.Column(db.INTEGER, db.ForeignKey('Shop.id'))
 
 
 class FoodClassification(db.Model):
@@ -79,7 +95,7 @@ class FoodClassification(db.Model):
 
     shop_id = db.Column(db.INTEGER, db.ForeignKey('Shop.id'))
 
-    foods = db.relationship('FoodClassification', backref='Food', lazy='dynamic')
+    foods = db.relationship('Food', backref='FoodClassification', lazy='dynamic')
 
 
 class Food(db.Model):
@@ -93,7 +109,7 @@ class Food(db.Model):
 
     food_classification_id = db.Column(db.INTEGER, db.ForeignKey('FoodClassification.id'))
 
-    food_numbers = db.relationship('Food', backref='FoodNumber', lazy='dynamic')
+    food_numbers = db.relationship('FoodNumber', backref='Food', lazy='dynamic')
 
 
 db.create_all()

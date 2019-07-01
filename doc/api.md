@@ -335,8 +335,6 @@ id: int
 ***params:***
 ```
 id: int
-page: int, //从1开始
-limit: int, //每页数量
 ```
 
 ***return:***
@@ -416,7 +414,13 @@ limit: int, //每页数量
             imageUrl: string,
             number: int
         }]
-        addressId: int,
+        address:{
+            name: string,
+            phone: string,
+            province: string,
+            city: string,
+            detail: string
+        },
         status: int,
         createdAt: timestamp,
         remark: string, //备注
