@@ -14,9 +14,9 @@
 }
 .row{
     text-align: center;
-    padding-bottom: 5%;
+    padding-bottom: 5px;
 }
-.card{
+.card {
     border: none;
 }
 

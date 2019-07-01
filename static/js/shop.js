@@ -1,9 +1,12 @@
 let cartKey = 'cart';
+localStorage.setItem(cartKey, JSON.stringify([]));
 if (!localStorage.getItem(cartKey)) {
-    localStorage.setItem(cartKey, JSON.stringify([]))
+    localStorage.setItem(cartKey, JSON.stringify([]));
 }
 document.addEventListener('DOMContentLoaded', () => {
+    loadHeadline();
     let types = ['热卖', '主食', '套餐', '小食'];
+    let names = ['sushi', 'pizza', 'coffee', 'friedchips'];
     let imgs = ['fastfood.jpeg', 'pasta.jpg', 'pizza.jpg', 'sushi.jpg'];
     let nav_section = document.getElementById('navs');
 
@@ -12,16 +15,36 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('dishes').append(type);
         add_nav(types[i]);
         let layout = add_dish_layout();
-        loadDishes(8, layout);
+        loadDishes(2, layout);
         document.getElementById('dishes').append(layout);
+    }
+
+    function loadHeadline() {
+        let params = getParams();
+        // console.log(params["sort"]);
+        document.getElementById('headline').innerHTML = decodeURI(params["sort"]+"");
+    }
+
+    function getParams() {
+
+        let str = window.location.search;
+        let objURL = {};
+
+        str.replace(
+            new RegExp( "([^?=&]+)(=([^&]*))?", "g" ),
+            function( $0, $1, $2, $3 ){
+                objURL[ $1 ] = $3;
+            }
+        );
+        return objURL;
     }
 
     function loadDishes(dish_num, layout) {
         // 传入dishes数据进行解析...
         for (var j=0; j<dish_num; j++){
-            let img = "../static/img/"+imgs[Math.round(Math.random()*3)];
+            let img = "../img/"+imgs[Math.round(Math.random()*3)];
             let price = Math.round(Math.random()*20);
-            let name = '(*ﾟДﾟ*)';
+            let name = names[j]+Math.round(Math.random()*20)+"."+Math.round(Math.random()*99);
             layout.append(add_dish(name, img, price));
         }
     }
@@ -67,86 +90,102 @@ document.addEventListener('DOMContentLoaded', () => {
        let dish_price = document.createElement('p');
        dish_price.className = 'dish_price';
        dish_price.innerHTML = price;
-       let template = Handlebars.compile(document.querySelector("#cart_modal").innerHTML);
-       let button = template({});
+       let button = draw_button('btn btn-success', '加购');
+       button.type = 'button';
+       button.dataset.toggle = "modal";
+       button.dataset.target = "#exampleModalScrollable";
+       button.dataset.items = load_cart_items(img, price, name);
+
        card_body.append(dish_img);
        card_body.append(dish_name);
        card_body.append(dish_price);
-       card_body.innerHTML+=button;
-       // bind_add_cart();
+       card_body.append(button);
        card.append(card_body);
        component.append(card);
        return component;
    }
-    // function bind_add_cart() {
-    //     document.querySelectorAll(".add_cart").forEach(button => {
-    //         button.onclick = ()=>{
-    //
-    //         }
-    //     })
-    // }
-    function load_cart(dish_img, dish_price, dish_name) {
 
-        load_cart_items(cart, dish_img, dish_price, dish_name);
+    $('#exampleModalScrollable').on('show.bs.modal', function (event) {
+        let button = $(event.relatedTarget); // Button that triggered the modal
+        let cart_items = button.data('items'); // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+
+        let template = Handlebars.compile(document.querySelector('#cart_card').innerHTML);
+        for (var i in cart_items) {
+            let card = template({"item": cart_items[i]});
+            document.querySelector("#cart_body").innerHTML += card;
+        }
+    });
+
+    $('#exampleModalScrollable').on('shown.bs.modal', function (event) {
+        let modal = $(this);
+        let cards = modal.find('.modal-body>');
+        for (let i = 0, card = cards.first(); i < cards.length; i++, card = card.next()) {
+            let body = card.find('.card-body').first();
+            let name = body.first();
+            let de_btn = name.next();
+            let label = de_btn.next();
+            let in_btn = label.next();
+            // console.log(in_btn);
+            in_btn.onclick = () => {
+                console.log(11111);
+            };
+            // console.log(in_btn);
+            //
+            // $(document).ready(function () {
+            //     in_btn.on('onclick', function () {
+            //         console.log('1');
+            //         // let num = parseInt(label.text());
+            //         // label.text(--num);
+            //         // let cart_items = updateLocalStorage(name.text(), num);
+            //         // restore_cart(cart_items);
+            //         // return false;
+            //     });
+            //
+            //
+            //     de_btn.on('onclick', function () {
+            //         console.log('2');
+            //     });
+            // });
+
+        }
+    });
+    
+    function manipulate() {
+        //
+        console.log(1);
     }
 
-    function load_cart_items(cart, dish_img, dish_price, dish_name) {
 
+    function updateLocalStorage(name, num) {
+            let cart_items = JSON.parse(localStorage.getItem(cartKey));
+            for (let i in cart_items) {
+                if (cart_items[i]['name'] === name) {
+                    cart_items[i]['num'] = num;
+                }
+            }
+            localStorage.setItem(cartKey, JSON.stringify(cart_items));
+            return cart_items;
+        }
 
-        cart_items = JSON.parse(localStorage.getItem(cartKey));
+    function load_cart_items(img, price, name) {
+        let cart_items = JSON.parse(localStorage.getItem(cartKey));
         for (let i in cart_items) {
-
+            if (cart_items[i]["name"] === name){
+                cart_items[i]["num"]++;
+                restore_cart(cart_items);
+                JSON.stringify(cart_items);
+            }
         }
+        let new_item = {"name": name, "price": price, "img": img, "num": 1}
+        cart_items.push(new_item);
+        restore_cart(cart_items);
+        return JSON.stringify(cart_items);
     }
 
-    function load_cart_dish(item_layout, img_path, price, name) {
-        // create elements.
-        let dish_img = draw_img(img_path);
-        let dish_price = document.createElement('label');
-        dish_price.innerHTML = price;
-        let dish_name = document.createElement('h5');
-        dish_name.innerHTML = name;
-        let input = document.createElement('input');
-        input.type = "number";
-        input.value = "1";
-        let de_button = draw_button("btn btn-outline-success btn-round", "-");
-        let in_button = draw_button("btn btn-outline-success btn-round", "+");
-        de_button.onclick = () => {
-            input.value = manipulate_value(input.value, "-");
-        };
-        in_button.onclick = () => {
-            input.value = manipulate_value(input.value, "+");
-        };
-
-        // layout cart.
-        let img_layout = draw_div("col-sm-2");
-        img_layout.append(dish_img);
-        let name_layout = draw_div("col-sm-4");
-        name_layout.append(dish_name);
-        let de_layout = draw_div("col-sm-1");
-        de_layout.append(de_button);
-        let input_layout = draw_div("col-sm-1");
-        input_layout.append(input);
-        let in_layout = draw_div("col-sm-1");
-        in_layout.append(in_button);
-        let price_layout = draw_div("col-sm-2");
-        price_layout.append(price);
-
-        item_layout.append(img_layout);
-        item_layout.append(name_layout);
-        item_layout.append(de_layout);
-        item_layout.append(input_layout);
-        item_layout.append(in_layout);
-        item_layout.append(price_layout);
-    }
-
-    function manipulate_value(value, operation) {
-        if (operation === '+') {
-            value++;
-        } else if (operation === '-' && value > 0) {
-            value--;
-        }
-        return value;
+    function restore_cart(cart_items) {
+        localStorage.setItem(cartKey, JSON.stringify(cart_items));
     }
 
     function draw_button(className, innerText) {

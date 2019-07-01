@@ -13,7 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
             let navItem = addNavItem(navs[i]);
             navItem.onclick = ()=>{
                 let category = navItem.innerHTML;
-                window.location.href = Flask.url_for('shop_category', {'category': category});
+                // window.location.href = Flask.url_for('shop_category', {'category': category});
+                window.location.href = "./templates/shopCategory.html?&sort="+category;
             };
             document.getElementById('nav').append(navItem);
         }
@@ -42,14 +43,15 @@ document.addEventListener('DOMContentLoaded', () => {
         store.className = 'card-body';
         let storeImg = document.createElement("img");
         storeImg.className = "card-img-top";
-        storeImg.src = "static/img/fastfood.jpeg";
+        storeImg.src = "./img/fastfood.jpeg";
         let storeName = document.createElement('h5');
         storeName.innerHTML = 'foo';
         let storeText = document.createElement('p');
         storeText.innerHTML = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio deserunt fuga perferendis modi earum';
         let storeLink = document.createElement('a');
         storeLink.className = 'btn btn-success';
-        storeLink.href = Flask.url_for('shop', {'shop_name': storeName.innerHTML});
+        // storeLink.href = Flask.url_for('shop', {'shop_name': storeName.innerHTML});
+        storeLink.href = "./templates/shop.html";
         storeLink.innerHTML = '去看看';
         store.append(storeImg);
         store.append(storeName);

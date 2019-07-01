@@ -1,7 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
+    loadHeader();
+    
    var stores = ['四季度', '丹尼斯', '瞌睡🐱', '戴女士'];
 
    loadStores(stores);
+
+    function loadHeader() {
+        let params = getParams();
+        // console.log(params["sort"]);
+        document.getElementById('shop_category_header').innerHTML = decodeURI(params["sort"]+"");
+    }
+
+    function getParams() {
+
+        let str = window.location.search;
+        let objURL = {};
+
+        str.replace(
+            new RegExp( "([^?=&]+)(=([^&]*))?", "g" ),
+            function( $0, $1, $2, $3 ){
+                objURL[ $1 ] = $3;
+            }
+        );
+        return objURL;
+    };
 
    function loadStores(stores) {
        for (let i in stores){
@@ -47,12 +69,13 @@ document.addEventListener('DOMContentLoaded', () => {
         let store = document.createElement('div');
         store.className = 'card-body';
         let storeImg = document.createElement('img');
-        storeImg.src = '../static/img/shop_icon.png';
+        storeImg.src = '../img/shop_icon.png';
         let storeName = document.createElement('h5');
         storeName.innerHTML = name;
         let storeLink = document.createElement('a');
         storeLink.className = 'btn btn-outline-success container-fluid';
-        storeLink.href = Flask.url_for('shop', {'shop_name': storeName.innerHTML});
+        // storeLink.href = Flask.url_for('shop', {'shop_name': storeName.innerHTML});
+        storeLink.href = "shop.html&shop_name="+storeName.innerText;
         storeLink.innerHTML = '进入店铺';
         store.append(storeImg);
         store.append(storeName);
@@ -73,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
         storeImg.className = "card-img-top";
 
         // need modify path...
-        storeImg.src = '../static/img/'+img;
+        storeImg.src = '../img/'+img;
         let storeName = document.createElement('h5');
         storeName.innerHTML = 'foo';
         let storeText = document.createElement('p');
