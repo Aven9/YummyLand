@@ -173,6 +173,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+
+    // 提交订单
+    document.getElementById('submit_cart').onclick = () => {
+        //提交订单
+        console.log(111);
+    };
+    
+
     function updateLocalStorage(name, num) {
             let cart_items = JSON.parse(localStorage.getItem(cartKey));
             for (let i in cart_items) {
