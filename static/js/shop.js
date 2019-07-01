@@ -3,12 +3,70 @@ localStorage.setItem(cartKey, JSON.stringify([]));
 if (!localStorage.getItem(cartKey)) {
     localStorage.setItem(cartKey, JSON.stringify([]));
 }
+
+function manipulate(btn) {
+    // console.log(btn);
+    let op = btn.innerText;
+    if (op === '+') {
+        let label = btn.previousElementSibling;
+        let num = parseFloat(label.innerText);
+        let name = btn.parentElement.firstElementChild.innerHTML;
+        num++;
+        let cart_items = JSON.parse(localStorage.getItem(cartKey));
+        for (let i in cart_items) {
+            if (cart_items[i]['name'] === name) {
+                cart_items[i]['num'] = num;
+                localStorage.setItem(cartKey, JSON.stringify(cart_items));
+                label.innerHTML = num+"";
+                break;
+            }
+        }
+
+    } else {
+        let label = btn.nextElementSibling;
+        let num = parseFloat(label.innerText);
+        let name = btn.parentElement.firstElementChild.innerHTML;
+        num--;
+        let cart_items = JSON.parse(localStorage.getItem(cartKey));
+        for (let i in cart_items) {
+            if (cart_items[i]['name'] === name) {
+                if (num>0) {
+                    cart_items[i]['num'] = num;
+                    label.innerHTML = num+"";
+                    localStorage.setItem(cartKey, JSON.stringify(cart_items));
+                    break
+                } else {
+                    cart_items.splice(i);
+                    let card = document.getElementById(name);
+                    card.parentNode.removeChild(card);
+                    label.innerHTML = num+"";
+                    localStorage.setItem(cartKey, JSON.stringify(cart_items));
+                    break;
+                }
+            }
+        }
+
+    }
+
+}
+
+// function manipulate(name, op) {
+//
+//     // console.log(name);
+//     let num = document.activeElement
+//
+//     document.getElementById('num').innerText = num+"";
+//     console.log(document.getElementById('num'));
+// }
+
 document.addEventListener('DOMContentLoaded', () => {
     loadHeadline();
     let types = ['热卖', '主食', '套餐', '小食'];
     let names = ['sushi', 'pizza', 'coffee', 'friedchips'];
     let imgs = ['fastfood.jpeg', 'pasta.jpg', 'pizza.jpg', 'sushi.jpg'];
     let nav_section = document.getElementById('navs');
+
+
 
     for (let i in types){
         let type = add_type(types[i]);
@@ -117,46 +175,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector("#cart_body").innerHTML += card;
         }
     });
-
-    $('#exampleModalScrollable').on('shown.bs.modal', function (event) {
-        let modal = $(this);
-        let cards = modal.find('.modal-body>');
-        for (let i = 0, card = cards.first(); i < cards.length; i++, card = card.next()) {
-            let body = card.find('.card-body').first();
-            let name = body.first();
-            let de_btn = name.next();
-            let label = de_btn.next();
-            let in_btn = label.next();
-            // console.log(in_btn);
-            in_btn.onclick = () => {
-                console.log(11111);
-            };
-            // console.log(in_btn);
-            //
-            // $(document).ready(function () {
-            //     in_btn.on('onclick', function () {
-            //         console.log('1');
-            //         // let num = parseInt(label.text());
-            //         // label.text(--num);
-            //         // let cart_items = updateLocalStorage(name.text(), num);
-            //         // restore_cart(cart_items);
-            //         // return false;
-            //     });
-            //
-            //
-            //     de_btn.on('onclick', function () {
-            //         console.log('2');
-            //     });
-            // });
-
-        }
-    });
-    
-    function manipulate() {
-        //
-        console.log(1);
-    }
-
 
     function updateLocalStorage(name, num) {
             let cart_items = JSON.parse(localStorage.getItem(cartKey));

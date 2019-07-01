@@ -21,10 +21,10 @@
                     </div>
                     <div class="col-md-5">
                         <div class="card-body">
-                            <h5 class="card-title">{{ item.name }}</h5>
-                            <a class="btn btn-outline-success" id="de_btn">-</a>
+                            <h5 class="card-title" id="name">{{ item.name }}</h5>
+                            <a class="btn btn-outline-success de_btn" onclick="manipulate(this);">-</a>
                             <label id="num">{{ item.num }}</label>
-                            <a class="btn btn-outline-success" id="in_btn" onclick="">+</a>
+                            <a class="btn btn-outline-success in_btn" onclick="manipulate(this);">+</a>
                         </div>
                     </div>
                     <div class="col-md-3">
