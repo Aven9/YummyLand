@@ -255,6 +255,8 @@ id: int
 ***params:***
 ```
 type: string
+page: int, //从1开始
+limit: int, //每页数量
 ```
 
 ***return:***
@@ -278,6 +280,8 @@ type: string
 ***params:***
 ```
 name: string
+page: int, //从1开始
+limit: int, //每页数量
 ```
 
 ***return:***
@@ -331,6 +335,8 @@ id: int
 ***params:***
 ```
 id: int
+page: int, //从1开始
+limit: int, //每页数量
 ```
 
 ***return:***

@@ -60,7 +60,9 @@ class Shop(db.Model):
     id = db.Column(db.INTEGER, autoincrement=True, primary_key=True)
     phone = db.Column(db.String, nullable=False)
     email = db.Column(db.String, nullable=False)
-    nickname = db.Column(db.String, nullable=False)
+    name = db.Column(db.String, nullable=False)
+    imageUrl = db.Column(db.String, nullable=False)
+    introduction = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
     classification = db.Column(db.String, nullable=False)
     createdAt = db.Column(db.TIMESTAMP, nullable=False)
@@ -92,5 +94,6 @@ class Food(db.Model):
     food_classification_id = db.Column(db.INTEGER, db.ForeignKey('FoodClassification.id'))
 
     food_numbers = db.relationship('Food', backref='FoodNumber', lazy='dynamic')
+
 
 db.create_all()

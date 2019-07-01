@@ -29,3 +29,7 @@ def send_email(to_account, subject, content):
 
     # 6. 关闭邮件服务
     smtp.quit()
+
+
+def path_to_url(path):
+    return 'https://homework.liuchaorun.cn/file/' + path

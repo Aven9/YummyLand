@@ -17,6 +17,7 @@ app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 # 查询时会显示原始SQL语句
 app.config['SQLALCHEMY_ECHO'] = True
+app.config['UPLOAD_FOLDER'] = '/home/lcr/files'
 Session(app)
 db = SQLAlchemy(app)
 
