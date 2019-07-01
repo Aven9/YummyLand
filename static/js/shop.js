@@ -50,16 +50,8 @@ function manipulate(btn) {
 
 }
 
-// function manipulate(name, op) {
-//
-//     // console.log(name);
-//     let num = document.activeElement
-//
-//     document.getElementById('num').innerText = num+"";
-//     console.log(document.getElementById('num'));
-// }
-
 document.addEventListener('DOMContentLoaded', () => {
+
     loadHeadline();
     let types = ['热卖', '主食', '套餐', '小食'];
     let names = ['sushi', 'pizza', 'coffee', 'friedchips'];
@@ -152,8 +144,9 @@ document.addEventListener('DOMContentLoaded', () => {
        button.type = 'button';
        button.dataset.toggle = "modal";
        button.dataset.target = "#exampleModalScrollable";
-       button.dataset.items = load_cart_items(img, price, name);
-
+       button.onclick = () => {
+           button.dataset.items = load_cart_items(img, price, name);
+       }
        card_body.append(dish_img);
        card_body.append(dish_name);
        card_body.append(dish_price);
@@ -164,13 +157,17 @@ document.addEventListener('DOMContentLoaded', () => {
    }
 
     $('#exampleModalScrollable').on('show.bs.modal', function (event) {
+        let shopping_cart = document.getElementById("cart_body");
+        while (shopping_cart.firstChild) {
+            shopping_cart.removeChild(shopping_cart.firstChild);
+        }
         let button = $(event.relatedTarget); // Button that triggered the modal
         let cart_items = button.data('items'); // Extract info from data-* attributes
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
 
         let template = Handlebars.compile(document.querySelector('#cart_card').innerHTML);
-        for (var i in cart_items) {
+        for (let i in cart_items) {
             let card = template({"item": cart_items[i]});
             document.querySelector("#cart_body").innerHTML += card;
         }
@@ -193,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (cart_items[i]["name"] === name){
                 cart_items[i]["num"]++;
                 restore_cart(cart_items);
-                JSON.stringify(cart_items);
+                return JSON.stringify(cart_items);
             }
         }
         let new_item = {"name": name, "price": price, "img": img, "num": 1}
