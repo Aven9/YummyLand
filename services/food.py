@@ -31,15 +31,17 @@ def get_shop(shop_id):
     shop = Shop.query.filter_by(id=shop_id).first()
     data = {}
     for classification in shop.food_classifications:
-        foods = []
-        for food in classification.foods:
-            foods.append({
-                'id': food.id,
-                'name': food.name,
-                'price': food.price,
-                'imageUrl': food.imageUrl
-            })
-        data.__setattr__(classification.text, foods)
+        if classification.status == 1:
+            foods = []
+            for food in classification.foods:
+                if food.status == 1:
+                    foods.append({
+                        'id': food.id,
+                        'name': food.name,
+                        'price': food.price,
+                        'imageUrl': food.imageUrl
+                    })
+            data[classification.text] = foods
     return {
         'id': shop.id,
         'name': shop.name,

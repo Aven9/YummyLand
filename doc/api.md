@@ -606,7 +606,7 @@ null
 
 ### 更新商店信息
 
-***url:*** /shop/upload
+***url:*** /shop/modify
 
 ***method:*** post
 

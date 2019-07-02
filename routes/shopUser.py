@@ -57,7 +57,7 @@ def login_shop():
         return returns(6, {}, '缺少参数！')
 
 
-@shopUser.route('/shop/get', method=['get'])
+@shopUser.route('/shop/get', methods=['get'])
 def shop_get_detail():
     email = session['email']
     if email is None:
@@ -81,7 +81,7 @@ def shop_image_upload():
         ext = file.filename.split('.')[1]
         filename = '_'.join(lazy_pinyin(name)) + '.' + ext
     new_filename = str(uuid.uuid4()) + '.' + filename.rsplit('.', 1)[1]
-    file.save(os.path.join('/home/lcr/files', new_filename))
+    file.save(os.path.join(os.path.abspath(os.path.dirname('.')), 'files', new_filename))
     return returns(0, {'url': path_to_url(new_filename)}, '成功！')
 
 
@@ -109,7 +109,7 @@ def shop_detail_modify():
     return returns(0, {'status': 'success'}, '成功')
 
 
-@shopUser.route('/shop/common', method=['get'])
+@shopUser.route('/shop/common', methods=['get'])
 def shop_common_get():
     email = session['email']
     if email is None:

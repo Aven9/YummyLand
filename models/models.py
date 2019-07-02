@@ -12,7 +12,7 @@ class User(db.Model):
     birthday = db.Column(db.String, nullable=False)
     createdAt = db.Column(db.TIMESTAMP, nullable=False)
 
-    commons = db.relationship('Commons', backref='User', lazy='dynamic')
+    commons = db.relationship('Common', backref='User', lazy='dynamic')
     addresses = db.relationship('Address', backref='User', lazy='dynamic')
     orders = db.relationship('Order', backref='User', lazy='dynamic')
 

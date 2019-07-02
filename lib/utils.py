@@ -32,4 +32,4 @@ def send_email(to_account, subject, content):
 
 
 def path_to_url(path):
-    return 'https://homework.liuchaorun.cn/file/' + path
+    return 'http://47.94.234.136/file/' + path
