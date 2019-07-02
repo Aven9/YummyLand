@@ -98,7 +98,7 @@ def user_info_upload():
         ext = file.filename.split('.')[1]
         filename = '_'.join(lazy_pinyin(name)) + '.' + ext
     new_filename = str(uuid.uuid4()) + '.' + filename.rsplit('.', 1)[1]
-    file.save(os.path.join(os.path.abspath(os.path.dirname('.')), 'files', new_filename))
+    file.save(os.path.join(os.path.abspath(os.path.dirname('.')), 'static', 'files', new_filename))
     change_image_url(email, new_filename)
     return returns(0, {'status': 'success'}, '成功！')
 
