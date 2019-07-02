@@ -32,4 +32,4 @@ def send_email(to_account, subject, content):
 
 
 def path_to_url(path):
-    return 'http://47.94.234.136/static/files/' + path
+    return 'http://127.0.0.1:5000/static/files/' + path
