@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let storeLink = document.createElement('a');
         storeLink.className = 'btn btn-success';
         // storeLink.href = Flask.url_for('shop', {'shop_name': storeName.innerHTML});
-        storeLink.href = "./templates/shop.html";
+        storeLink.href = "./templates/shop.html?&shop_name=foo";
         storeLink.innerHTML = '去看看';
         store.append(storeImg);
         store.append(storeName);

@@ -58,21 +58,19 @@ document.addEventListener('DOMContentLoaded', () => {
     let imgs = ['fastfood.jpeg', 'pasta.jpg', 'pizza.jpg', 'sushi.jpg'];
     let nav_section = document.getElementById('navs');
 
-
-
     for (let i in types){
         let type = add_type(types[i]);
         document.getElementById('dishes').append(type);
         add_nav(types[i]);
         let layout = add_dish_layout();
-        loadDishes(2, layout);
+        loadDishes(3, layout);
         document.getElementById('dishes').append(layout);
     }
 
     function loadHeadline() {
         let params = getParams();
         // console.log(params["sort"]);
-        document.getElementById('headline').innerHTML = decodeURI(params["sort"]+"");
+        document.getElementById('headline').innerHTML = decodeURI(params["shop_name"]+"");
     }
 
     function getParams() {
@@ -179,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //提交订单
         console.log(111);
     };
-    
+
 
     function updateLocalStorage(name, num) {
             let cart_items = JSON.parse(localStorage.getItem(cartKey));
