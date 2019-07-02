@@ -1,5 +1,11 @@
 from flask import Blueprint, session, request
 
-from lib.utils import returns
+from lib.utils import returns, send_email
 
-shop = Blueprint('shopUser', __name__)
+shopUser = Blueprint('shopUser', __name__)
+
+
+@shopUser.route('/verificationCode', methods=['post'])
+def verification_code():
+    data = request.get_json()
+
