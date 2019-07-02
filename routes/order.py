@@ -15,8 +15,8 @@ def order_create():
     if email is None:
         return returns(1, {}, '未登录或登陆过期')
     data = request.get_json()
-    if data.__contains__('foods') and data.__contains__('addressId') and data.__contains__('remark'):
-        o = create_order(email, data['foods'], data['addressId'], data['remark'])
+    if data.__contains__('foods') and data.__contains__('addressId') and data.__contains__('remark') and data.__contains__('shopId'):
+        o = create_order(email, data['foods'], data['addressId'], data['remark'], data['shopId'])
         return returns(0, {'id': o.id}, '成功！')
     else:
         return returns(6, {}, '缺少参数！')

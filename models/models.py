@@ -42,6 +42,7 @@ class Order(db.Model):
 
     user_id = db.Column(db.INTEGER, db.ForeignKey('User.id'))
     address_id = db.Column(db.INTEGER, db.ForeignKey('Address.id'))
+    shop_id = db.Column(db.INTEGER, db.ForeignKey('Shop.id'))
 
     food_numbers = db.relationship('FoodNumber', backref='Order', lazy='dynamic')
 
@@ -60,15 +61,17 @@ class Shop(db.Model):
     __tablename__ = 'Shop'
 
     id = db.Column(db.INTEGER, autoincrement=True, primary_key=True)
-    phone = db.Column(db.String, nullable=False)
+    phone = db.Column(db.String, nullable=True)
     email = db.Column(db.String, nullable=False)
     name = db.Column(db.String, nullable=False)
     imageUrl = db.Column(db.String, nullable=False)
     introduction = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
     classification = db.Column(db.String, nullable=False)
+    address = db.Column(db.String, nullable=False)
     createdAt = db.Column(db.TIMESTAMP, nullable=False)
 
+    orders = db.relationship('Order', backref='Order', lazy='dynamic')
     commons = db.relationship('Common', backref='Shop', lazy='dynamic')
     food_classifications = db.relationship('FoodClassification', backref='Shop', lazy='dynamic')
 
@@ -91,6 +94,7 @@ class FoodClassification(db.Model):
 
     id = db.Column(db.INTEGER, autoincrement=True, primary_key=True)
     text = db.Column(db.String, nullable=False)
+    status = db.Column(db.INTEGER, default=1)
     createdAt = db.Column(db.TIMESTAMP, nullable=False)
 
     shop_id = db.Column(db.INTEGER, db.ForeignKey('Shop.id'))
@@ -106,6 +110,7 @@ class Food(db.Model):
     name = db.Column(db.String, nullable=False)
     imageUrl = db.Column(db.String, nullable=False)
     createdAt = db.Column(db.TIMESTAMP, nullable=False)
+    status = db.Column(db.INTEGER, default=1)
 
     food_classification_id = db.Column(db.INTEGER, db.ForeignKey('FoodClassification.id'))
 

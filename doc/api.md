@@ -316,6 +316,7 @@ id: int
     imageUrl: string,
     introduction: string,
     phone: string,
+    address: string
     food: {
         'categoryName': [{
             id: int,
@@ -540,6 +541,10 @@ email: string
 name: string,
 email: string,
 password: string, //sha256加密
+code: int
+address: string,
+classification: string,
+introduction: string
 ```
 
 ***return:***
@@ -586,6 +591,8 @@ null
     imageUrl: string,
     introduction: string,
     phone: string,
+    address: string,
+    classification: string,
     food: {
         'categoryName': [{
             id: int,
@@ -609,6 +616,8 @@ name: string,
 imageUrl: string,
 introduction: string,
 phone: string,
+address: string,
+classification: string,
 food: {
     'categoryName': [{
         name: string,
@@ -659,6 +668,7 @@ null
 {
     commons: [{
         id: int,
+        username: string,
         text: string,
         imageUrl: string,
         rate: int,
@@ -679,7 +689,7 @@ null
 
 ***url:*** /get
 
-***method:*** post
+***method:*** get
 
 ***params:***
 ```

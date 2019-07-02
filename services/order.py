@@ -2,9 +2,9 @@ from models.models import Order, FoodNumber, User, db, Common
 import datetime
 
 
-def create_order(email, foods, address_id, remark):
+def create_order(email, foods, address_id, remark, shop_id):
     user = User.query.filter_by(email=email).first()
-    order = Order(status=0, remark=remark, address_id=address_id)
+    order = Order(status=0, remark=remark, address_id=address_id, shop_id=shop_id)
     for food in foods:
         order.food_numbers.append(FoodNumber(number=food.number, food_id=food.id))
     user.orders.append(order)
