@@ -4,7 +4,7 @@ import datetime
 
 
 def create_user(username, email, password):
-    db.session.add(User(username=username, email=email, password=password, imageUrl='', birthday = '', createdAt=datetime.datetime.now()))
+    db.session.add(User(username=username, email=email, password=password, imageUrl='', birthday='', createdAt=datetime.datetime.now()))
     db.session.commit()
 
 
@@ -13,7 +13,7 @@ def query_user(email):
     return user is None
 
 
-def login(email, password):
+def login_login(email, password):
     user = User.query.filter_by(email=email, password=password).first()
     return user is None
 

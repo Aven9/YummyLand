@@ -7,7 +7,7 @@ from werkzeug.utils import secure_filename
 from pypinyin import lazy_pinyin
 
 from lib.utils import returns, send_email
-from services.user import create_user, query_user, login, get_user, modify_user, change_image_url, get_address, add_address, modify_address, delete_address
+from services.user import create_user, query_user, login_login, get_user, modify_user, change_image_url, get_address, add_address, modify_address, delete_address
 
 user = Blueprint('user', __name__)
 
@@ -46,7 +46,7 @@ def register():
 def login():
     data = request.get_json()
     if data.__contains__('email') and data.__contains__('password'):
-        if login(data['email'], data['password']) is True:
+        if login_login(data['email'], data['password']) is True:
             return returns(3, {}, '账号或密码错误')
         else:
             session['email'] = data['email']
@@ -98,7 +98,7 @@ def user_info_upload():
         ext = file.filename.split('.')[1]
         filename = '_'.join(lazy_pinyin(name)) + '.' + ext
     new_filename = str(uuid.uuid4()) + '.' + filename.rsplit('.', 1)[1]
-    file.save(os.path.join('/home/lcr/files', new_filename))
+    file.save(os.path.join(os.path.abspath(os.path.dirname('.')), 'files', new_filename))
     change_image_url(email, new_filename)
     return returns(0, {'status': 'success'}, '成功！')
 

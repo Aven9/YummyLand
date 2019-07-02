@@ -14,7 +14,7 @@ def shop_order_get():
     returns(0, {'orders': get_order(email)}, '')
 
 
-@shopOrder.route('/confirm', method=['post'])
+@shopOrder.route('/confirm', methods=['post'])
 def shop_order_confirm():
     email = session['email']
     data = request.get_json()
@@ -26,7 +26,7 @@ def shop_order_confirm():
     returns(0, {'id': data['id']}, '')
 
 
-@shopOrder.route('/send', method=['post'])
+@shopOrder.route('/send', methods=['post'])
 def shop_order_send():
     email = session['email']
     data = request.get_json()
@@ -38,7 +38,7 @@ def shop_order_send():
     returns(0, {'id': data['id']}, '')
 
 
-@shopOrder.route('/cancel', method=['post'])
+@shopOrder.route('/cancel', methods=['post'])
 def shop_order_cancel():
     email = session['email']
     data = request.get_json()

@@ -7,7 +7,8 @@ def get_shop(email):
 
 
 def create_shop(email, name, password, address, classification, introduction):
-    shop = Shop(email=email, name=name, password=password, imageUrl='', address=address, classification=classification, introduction=introduction)
+    shop = Shop(email=email, name=name, password=password, imageUrl='', address=address, classification=classification, introduction=introduction, createdAt=datetime.datetime.now())
+    db.session.add(shop)
     db.session.commit()
     return shop
 
@@ -16,15 +17,17 @@ def get_shop_detail(email):
     shop = Shop.query.filter_by(email=email).first()
     data = {}
     for classification in shop.food_classifications:
-        foods = []
-        for food in classification.foods:
-            foods.append({
-                'id': food.id,
-                'name': food.name,
-                'price': food.price,
-                'imageUrl': food.imageUrl
-            })
-        data.__setattr__(classification.text, foods)
+        if classification.status == 1:
+            foods = []
+            for food in classification.foods:
+                if food.status == 1:
+                    foods.append({
+                        'id': food.id,
+                        'name': food.name,
+                        'price': food.price,
+                        'imageUrl': food.imageUrl
+                    })
+            data[classification.text] = foods
     return {
         'id': shop.id,
         'name': shop.name,
@@ -50,12 +53,12 @@ def modify_shop_detail(email, name, imageUrl, introduction, phone, address, clas
     shop.address = address
     shop.classification = classification
     for cs in foods:
-        c = FoodClassification.query.filter_by(text=cs, shop_id=shop.id)
+        c = FoodClassification.query.filter_by(text=cs, shop_id=shop.id).first()
         if c is None:
             c = FoodClassification(text=cs, status=1, createdAt=datetime.datetime.now())
             shop.food_classifications.append(c)
         for f in foods[cs]:
-            c.foods.append(Food(price=f.price, name=f.name, imageUrl=f.imageUrl, createdAt=datetime.datetime.now(), status=1))
+            c.foods.append(Food(price=f['price'], name=f['name'], imageUrl=f['imageUrl'], createdAt=datetime.datetime.now(), status=1))
     db.session.commit()
 
 

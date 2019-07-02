@@ -2,6 +2,7 @@ from flask import Blueprint, session, request
 import os
 from werkzeug.utils import secure_filename
 from pypinyin import lazy_pinyin
+import uuid
 
 from lib.utils import returns, path_to_url
 from services.order import cancel_order, get_order, create_order, confirm_order, create_common
@@ -76,7 +77,7 @@ def common_upload():
         ext = file.filename.split('.')[1]
         filename = '_'.join(lazy_pinyin(name)) + '.' + ext
     new_filename = str(uuid.uuid4()) + '.' + filename.rsplit('.', 1)[1]
-    file.save(os.path.join('/home/lcr/files', new_filename))
+    file.save(os.path.join(os.path.abspath(os.path.dirname('.')), 'files', new_filename))
     return returns(0, {'url': path_to_url(new_filename)}, '成功！')
 
 
