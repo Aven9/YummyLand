@@ -4,6 +4,53 @@
     <meta charset="UTF-8">
     <title>FoodHome: Enjoy meal</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+    <script type="text/javascript" src="../js/setting.js"></script>
+
+    <script id="address" type="text/x-handlebars-template">
+        <div id="address{{ index }}">
+            <h5> 地址 {{ index }} </h5>
+
+            <div class="row container-fluid">
+                <div class="col-sm-3">
+                    <div class="input-group mb-3">
+                        <select class="custom-select province" id="inputGroupSelect02">
+
+                            <!--  添加省  -->
+
+                        </select>
+                        <div class="input-group-append">
+                            <label class="input-group-text" for="inputGroupSelect02">省</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="input-group mb-3">
+                        <select class="custom-select city" id="inputGroupSelect02">
+
+                            <!--  添加市  -->
+
+                        </select>
+                        <div class="input-group-append">
+                            <label class="input-group-text" for="inputGroupSelect02">市</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="详细地址" aria-label="详细地址" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2">详细地址</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </script>
 
 </head>
 <body>
@@ -52,10 +99,37 @@
     </nav>
 
     <!--header section-->
-    <h1>My Setting</h1>
-    <img src="../img/user_icon.jpeg" width="20%" alt="">
-    <!--body section-->
-    <!--用户名-->
+    <div class="row container-fluid">
+
+        <div class="col-sm-4">
+            <h1> My Setting </h1>
+            <img src="../img/user_icon.jpeg" width="80%" alt="">
+            <h4> User </h4>
+            <h5> No description yet. </h5>
+            <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio deserunt fuga perferendis modi earum
+                commodi aperiam temporibus quod nulla nesciunt aliquid debitis ullam omnis quos ipsam, aspernatur id
+                excepturi hic.
+            </p>
+        </div>
+
+        <div class="col-sm-8">
+            <div class="row" id="default_address">
+                <div class="col-sm-2">
+                    <h5>默认地址</h5>
+                </div>
+                <div class="col-sm-7">
+                    <p> 啊哦，暂无地址┐(ﾟ～ﾟ)┌ </p>
+                </div>
+
+                <div class="col-sm-3">
+                     <button class="btn btn-primary" id="add_address_btn">添加地址</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <!--地址列表，添加地址，删除地址，修改地址-->
 </body>
 </html>
