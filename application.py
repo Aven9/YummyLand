@@ -1,9 +1,7 @@
 from flask import Flask, render_template, jsonify
 from flask_session import Session
-from flask_jsglue import JSGlue
 
 app = Flask(__name__)
-jsglue = JSGlue(app)
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"

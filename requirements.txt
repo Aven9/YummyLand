@@ -1,5 +1,4 @@
 Flask
 Flask-Session
-Flask-JSGlue
 flask_sqlalchemy
 pypinyin
