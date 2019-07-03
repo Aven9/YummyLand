@@ -4,6 +4,40 @@
     <meta charset="UTF-8">
     <title>FoodHome: Enjoy meal</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+    <script type="text/javascript" src="../js/order.js"></script>
+
+    <script id="order" type="text/x-handlebars-template">
+        <div class="container-fluid">
+            <div class="card mb-3" style="max-width: 85%">
+                <div class="row no-gutters">
+
+                    <div class="col-md-4">
+                        <img src="{{ item.img }}" class="card-img d-flex align-items-center" alt="...">
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="card-body">
+                            <h5 class="card-title" id="name">{{ item.name }}</h5>
+                            <label>数量：{{ item.num }}</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card-body">
+                            <p class="card-title">单价：￥{{ item.price }}</p>
+                            <h5>总支付：￥{{ item.tt_price }}</h5>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <hr>
+        </div>
+    </script>
 
 </head>
 <body>
@@ -52,9 +86,16 @@
     </nav>
 
     <!--header section-->
-    <h1>My book</h1>
-    <!--body section-->
+    <h2>My Order</h2>
+
     <!--根据订单状态分类，显示-->
+    <h4 style="padding-left: 2%">正在进行的订单</h4>
+    <div class="row" id="current_order">
+    </div>
+    <!--recommend-->
+    <h4 style="padding-left: 2%; padding-top: 2%">已完成订单</h4>
+    <div class="row" id="finished_order">
+    </div>
 
 </body>
 </html>

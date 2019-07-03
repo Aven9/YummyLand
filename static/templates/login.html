@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<!-- Head -->
+<head>
+	<title>Yummyland: Login</title>
+	<!-- Meta-Tags -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!-- //Meta-Tags -->
+	<!-- Style --> <link rel="stylesheet" href="../css/login.css" type="text/css" media="all">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+
+    <script src="../js/login.js"></script>
+</head>
+<!-- //Head -->
+<!-- Body -->
+<body>
+	<h1>Yummyland</h1>
+
+	<div class="contain w3layouts agileits">
+
+		<div class="login w3layouts agileits">
+			<h2>登 录</h2>
+			<form action="#" method="post">
+				<input type="text" name="username" id="login_username" placeholder="用户名" required="">
+				<input type="password" name="password" id="login_password" placeholder="密码" required="">
+			</form>
+			<ul class="tick w3layouts agileits">
+				<li>
+					<input type="checkbox" id="login_brand" value="">
+					<label for="login_brand"><span></span>记住我</label>
+				</li>
+			</ul>
+			<div class="send-button w3layouts agileits">
+				<form>
+					<input type="button" value="登 录" id="loginBtn">
+				</form>
+			</div>
+			<a href="#">忘记密码?</a>
+			<div class="clear"></div>
+		</div>
+
+
+		<div class="register w3layouts agileits">
+			<h2>注 册</h2>
+			<form action="#" method="post">
+				<input type="text" name="username" id="username" placeholder="用户名" required="">
+				<input type="text" name="email" id="email" placeholder="邮箱" required="">
+				<input type="password" name="password" id="password" placeholder="密码" required="">
+				<input type="password" name="rePassword" id="rePassword" placeholder="确认密码" required="">
+			</form>
+			<div class="send-button w3layouts agileits">
+				<form>
+					<input type="button" value="免费注册" id="signUpBtn">
+				</form>
+			</div>
+			<div class="clear"></div>
+		</div>
+
+		<div class="clear"></div>
+
+	</div>
+	<div class="footer w3layouts agileits">
+		<p>Copyright &copy; threeSquirrels</p>
+	</div>
+
+</body>
+
+</html>
