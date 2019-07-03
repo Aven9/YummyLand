@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 # 设置连接数据库的URL
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@127.0.0.1:5432/takeaway'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://tdfcxlreofipuf:ff9105caefd58aa5f9d486fa9f582770295061e2c82f58ae3675dfa24ffbc280@ec2-174-129-227-51.compute-1.amazonaws.com:5432/dd9p761ii1tog0'
 
 # 设置每次请求结束后会自动提交数据库中的改动
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True

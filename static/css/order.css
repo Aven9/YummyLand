@@ -1,0 +1,49 @@
+h2{
+    padding-top: 2%;
+    padding-left: 1%;
+    font-family: 'Bitter', sans-serif;
+}
+
+h4 {
+    padding-top: 2%;
+    padding-left: 1%;
+    font-family: 'Bitter', sans-serif;
+}
+
+.container-fluid{
+    text-align: center;
+    background-color: transparent;
+}
+
+.card{
+    padding-left: 5%;
+    border: none;
+    background-color: transparent;
+}
+hr{
+    padding-left: 5%;
+    padding-right: 5%;
+}
+#breadcrumb{
+    background-color: transparent;
+}
+
+body{
+    background-color: ivory;
+}
+
+#navs a{
+    padding: 2%;
+    font-family: "Arial Hebrew", sans-serif;
+    font-size: 20px;
+    text-decoration: none;
+    color: #555555;
+}
+
+#navs a:hover{
+    font-size: 22px;
+    color: #444444;
+}
+#navs a::before{
+    content: "☞ ";
+}

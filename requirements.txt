@@ -2,3 +2,5 @@ Flask
 Flask-Session
 flask_sqlalchemy
 pypinyin
+psycopg2
+pysocks
