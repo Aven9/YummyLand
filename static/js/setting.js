@@ -2,6 +2,11 @@ const key = "4313174585d59c9cc9087fa77f30ff4b";
 function requestURL(district) {
      return "https://restapi.amap.com/v3/config/district?key=" + key + "&keywords=" + district + "&subdistrict=1";
 }
+const addressKey = 'address';
+// localStorage.clear();
+if (!localStorage.getItem(addressKey)) {
+    localStorage.setItem(addressKey, JSON.stringify([]));
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('add_address_btn').onclick = () => {
@@ -25,7 +30,25 @@ document.addEventListener('DOMContentLoaded', () => {
             let province = selector1.val();
             loadCities(selector2, province);
         };
+
+        if (index === 1) {
+            let detail = $('#address1').find('input');
+            detail[0].onkeyup = () => {
+                if (detail.val().length>0) {
+                    console.log('keyup');
+                    $('#default_address').find('p')[0].innerHTML = selector1.val() + selector2.val()
+                        + detail.val();
+                } else {
+                    $('#default_address').find('p')[0].innerHTML = "啊哦，暂无地址┐(ﾟ～ﾟ)┌";
+                }
+            };
+        }
     };
+
+    // document.getElementById('save_address').onclick = () => {
+    //     //保存到数据库
+    // };
+
 
     function loadProvince(selector) {
 
