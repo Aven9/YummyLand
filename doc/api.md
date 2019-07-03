@@ -2,8 +2,8 @@
 
 ## 说明
 
-1. 协议为https
-2. 域名homework.liuchaorun.cn
+1. 协议为http
+2. ip为47.94.234.136，端口80
 3. 所有请求默认携带前缀 /server
 4. 返回数据均为json，数据格式如下，code为自定义状态码，data为返回数据，msg代表错误提示信息
     ```
